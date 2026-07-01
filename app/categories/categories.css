@@ -171,3 +171,47 @@
 .photo-clear:hover { background: #dc2626; }
 .spin { animation: spin360 0.8s linear infinite; }
 @keyframes spin360 { to { transform: rotate(360deg); } }
+
+/* ═══════════════════════════════════════════
+   MOBILE RESPONSIVE
+   ═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* Page header — stack title and button */
+  .page-head { flex-direction: column; align-items: stretch; gap: 14px; }
+  .page-head .btn { justify-content: center; }
+
+  /* Toolbar — stack search + count */
+  .toolbar { flex-direction: column; align-items: stretch; gap: 10px; }
+  .search { max-width: none; }
+  .count-note { text-align: right; }
+
+  /* Table — allow horizontal scroll instead of squishing */
+  .panel { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .data-table { min-width: 560px; }
+  .data-table th, .data-table td { padding: 12px 14px; }
+
+  /* Modal — near full-screen on mobile */
+  .overlay { padding: 0; align-items: flex-end; }
+  .modal {
+    max-width: 100%;
+    border-radius: 18px 18px 0 0;   /* sheet-style from bottom */
+    max-height: 92vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .modal-sm { max-width: 100%; }
+  .modal-body { max-height: none; flex: 1; padding: 20px; }
+  .modal-head { padding: 18px 20px; }
+  .modal-foot { padding: 16px 20px; }
+  .modal-foot .btn { flex: 1; justify-content: center; }
+
+  /* Pickers */
+  .icon-picker { grid-template-columns: repeat(6, 1fr); }
+  .color-picker { gap: 8px; }
+}
+
+@media (max-width: 480px) {
+  .icon-picker { grid-template-columns: repeat(5, 1fr); }
+  .cp { width: 32px; height: 32px; }
+  .page-title { font-size: 21px; }
+}

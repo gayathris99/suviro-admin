@@ -88,8 +88,16 @@
 }
 
 @media (max-width: 768px) {
-  .admin-topbar-in { padding: 12px 18px; }
+  .admin-topbar-in { padding: 12px 16px; }
   .admin-user-name { display: none; }
-  .admin-tabs-in { padding: 0 18px; }
-  .admin-main { padding: 20px 18px; }
+  .admin-tabs-in { padding: 0 16px; }
+  .admin-main { padding: 20px 16px; }
+  .admin-topbar-right { gap: 12px; }
+  .admin-tab { padding: 14px 16px; font-size: 13px; }
+}
+
+@media (max-width: 420px) {
+  .admin-brand-name { font-size: 17px; }
+  .admin-logout { font-size: 12px; }
+  .admin-tab { padding: 13px 14px; }
 }

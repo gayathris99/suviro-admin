@@ -87,6 +87,22 @@ export default function ProductsPage() {
   async function handleUpload(e, slot) {
     const file = e.target.files?.[0]
     if (!file) return
+
+    // Validate type
+    if (!file.type.startsWith('image/')) {
+      alert('Please choose an image file (PNG or JPG).')
+      e.target.value = ''
+      return
+    }
+    // Validate size — 5MB limit
+    const MAX_MB = 5
+    if (file.size > MAX_MB * 1024 * 1024) {
+      const sizeMb = (file.size / (1024 * 1024)).toFixed(1)
+      alert(`Image is ${sizeMb}MB — please use an image under ${MAX_MB}MB.`)
+      e.target.value = ''
+      return
+    }
+
     setUploading((u) => ({ ...u, [slot]: true }))
     try {
       const url = await uploadToCloudinary(file)
