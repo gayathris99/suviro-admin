@@ -1,0 +1,142 @@
+/* ═══ SHARED PAGE / TABLE / MODAL STYLES ═══ */
+/* (used by both Categories and Products pages) */
+
+/* Page header */
+.page-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 22px; gap: 12px; flex-wrap: wrap;
+  }
+  .page-title { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; }
+  .page-sub { font-size: 13px; color: var(--muted); margin-top: 3px; }
+  
+  /* Toolbar + search */
+  .toolbar {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px; gap: 12px;
+  }
+  .search { position: relative; flex: 1; max-width: 360px; }
+  .search svg { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: #9ca3af; }
+  .search input {
+    width: 100%; padding: 10px 14px 10px 40px;
+    border: 1px solid var(--border); border-radius: 10px;
+    font-size: 14px; outline: none; background: #fff; transition: border 0.15s;
+  }
+  .search input:focus { border-color: var(--accent); }
+  .count-note { font-size: 12px; color: #9ca3af; white-space: nowrap; }
+  
+  /* Table */
+  .panel { background: #fff; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+  .data-table { width: 100%; border-collapse: collapse; }
+  .data-table th {
+    text-align: left; font-size: 10px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; color: #9ca3af;
+    padding: 14px 20px; border-bottom: 1px solid var(--border); background: #fafbfc;
+  }
+  .data-table td { padding: 15px 20px; border-bottom: 1px solid var(--border); font-size: 13px; vertical-align: middle; }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tbody tr:hover td { background: #fafbfc; }
+  
+  .cat-cell { display: flex; align-items: center; gap: 12px; }
+  .cat-ic { width: 42px; height: 42px; border-radius: 11px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .cat-nm { font-weight: 600; font-size: 14px; }
+  .cat-tg { font-size: 11px; color: var(--accent); margin-top: 1px; }
+  .desc-cell { color: var(--muted); max-width: 320px; }
+  
+  .form-pill { font-size: 12px; background: var(--bg); padding: 5px 12px; border-radius: 100px; }
+  .row-actions { display: flex; gap: 6px; justify-content: flex-end; }
+  .empty { padding: 48px; text-align: center; color: var(--muted); font-size: 14px; }
+  
+  /* Modal */
+  .overlay {
+    position: fixed; inset: 0; background: rgba(11, 30, 60, 0.5);
+    display: flex; align-items: flex-start; justify-content: center;
+    padding: 40px 20px; z-index: 100; overflow-y: auto;
+  }
+  .modal {
+    background: #fff; border-radius: 18px; width: 100%; max-width: 540px;
+    box-shadow: 0 24px 70px rgba(11, 30, 60, 0.25);
+    animation: modalPop 0.2s ease;
+  }
+  .modal-sm { max-width: 440px; }
+  @keyframes modalPop { from { transform: scale(0.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .modal-head {
+    padding: 22px 26px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .modal-title { font-size: 18px; font-weight: 600; }
+  .modal-body { padding: 24px 26px; max-height: 66vh; overflow-y: auto; }
+  .modal-foot {
+    padding: 18px 26px; border-top: 1px solid var(--border);
+    display: flex; gap: 10px; justify-content: flex-end;
+  }
+  
+  /* Form fields */
+  .field { margin-bottom: 18px; }
+  .field-label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 7px; }
+  .req { color: #dc2626; }
+  .inp, .ta, .sel {
+    width: 100%; padding: 11px 14px; border: 1px solid var(--border);
+    border-radius: 10px; font-size: 14px; color: var(--dark);
+    background: #fff; outline: none; transition: border 0.15s;
+  }
+  .inp:focus, .ta:focus, .sel:focus { border-color: var(--accent); }
+  .ta { resize: vertical; min-height: 90px; line-height: 1.6; }
+  .hint { font-size: 11px; color: var(--muted); margin-top: 5px; }
+  
+  /* Icon picker */
+  .icon-picker { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; }
+  .ip {
+    aspect-ratio: 1; border: 1px solid var(--border); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    background: #fff; cursor: pointer; transition: all 0.15s;
+  }
+  .ip:hover { border-color: #c8d4e0; }
+  .ip--sel { background: var(--accent); border-color: var(--accent); }
+  
+  /* Color picker */
+  .color-picker { display: flex; gap: 10px; flex-wrap: wrap; }
+  .cp {
+    width: 36px; height: 36px; border-radius: 9px; cursor: pointer;
+    border: 3px solid transparent; transition: all 0.15s; position: relative;
+  }
+  .cp--sel { box-shadow: 0 0 0 2px var(--dark); }
+  .cp--sel::after {
+    content: '✓'; position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 14px; font-weight: 700;
+  }
+  
+  /* Preview */
+  .preview { background: var(--bg); border-radius: 12px; padding: 14px; display: flex; align-items: center; gap: 14px; }
+  
+  /* Delete warning */
+  .warn { background: #fef2f2; border: 1px solid #fca5a5; border-radius: 11px; padding: 15px; display: flex; gap: 12px; }
+  .warn svg { color: #dc2626; flex-shrink: 0; }
+  .warn-tx { font-size: 13px; color: #991b1b; line-height: 1.6; }
+  
+  /* Upload box (used on products page) */
+  .upload { border: 2px dashed var(--border); border-radius: 12px; padding: 24px; text-align: center; cursor: pointer; transition: all 0.15s; }
+  .upload:hover { border-color: var(--accent); background: #fafbff; }
+  .upload.has-img { padding: 0; border-style: solid; overflow: hidden; }
+  .upload.has-img img { width: 100%; height: 160px; object-fit: cover; display: block; }
+  .up-ic { color: #c8d0da; margin-bottom: 6px; display: flex; justify-content: center; }
+  .up-tx { font-size: 13px; color: var(--muted); }
+  .up-link { color: var(--accent); font-weight: 500; }
+  
+  @media (max-width: 768px) {
+    .hide-sm { display: none; }
+    .icon-picker { grid-template-columns: repeat(6, 1fr); }
+  }
+  
+  /* ── Product table cells ── */
+  .prod-cell { display: flex; align-items: center; gap: 12px; }
+  .prod-img {
+    width: 46px; height: 46px; border-radius: 9px; background: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    color: #c8d0da; flex-shrink: 0; overflow: hidden;
+  }
+  .prod-img img { width: 100%; height: 100%; object-fit: cover; }
+  .prod-brand { font-weight: 600; font-size: 14px; }
+  .prod-drug { font-size: 11px; color: var(--muted); margin-top: 1px; max-width: 240px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .comp-cell { color: var(--muted); max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; }
+  .pill { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: 5px; }
