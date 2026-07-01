@@ -89,9 +89,39 @@
   aspect-ratio: 1; border: 1px solid var(--border); border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
   background: #fff; cursor: pointer; transition: all 0.15s;
+  position: relative;
 }
 .ip:hover { border-color: #c8d4e0; }
 .ip--sel { border-width: 1.5px; }
+
+/* Icon tooltip */
+.ip-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--dark);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 5px 9px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+  z-index: 10;
+}
+.ip-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: var(--dark);
+}
+.ip:hover .ip-tooltip { opacity: 1; }
 
 /* Color picker */
 .color-picker { display: flex; gap: 10px; flex-wrap: wrap; }

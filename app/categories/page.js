@@ -220,11 +220,11 @@ export default function CategoriesPage() {
                       <button
                         key={opt.name}
                         className={`ip ${isSel ? 'ip--sel' : ''}`}
-                        title={opt.label}
                         onClick={() => setForm({ ...form, icon: opt.name })}
                         style={isSel ? { background: bgForColor(form.color), borderColor: form.color } : undefined}
                       >
                         <CategoryIcon name={opt.name} size={22} color={isSel ? form.color : '#6b7280'} />
+                        <span className="ip-tooltip">{opt.label}</span>
                       </button>
                     )
                   })}
