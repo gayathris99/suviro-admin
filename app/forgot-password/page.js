@@ -20,13 +20,25 @@ export default function ForgotPasswordPage() {
     }
     setLoading(true)
 
-    // ── TEMPORARY: fake send for UI demo ──
-    // Later: POST /api/forgot-password → generates a reset token,
-    // saves it with 1-hr expiry, emails a reset link via Nodemailer.
-    setTimeout(() => {
+    // Real request — generates a token and emails a reset link
+    try {
+      const res = await fetch('/api/forgot-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim() }),
+      })
+      if (!res.ok) {
+        const data = await res.json()
+        setError(data.error || 'Something went wrong. Please try again.')
+        setLoading(false)
+        return
+      }
       setLoading(false)
       setSent(true)
-    }, 600)
+    } catch (err) {
+      setError('Something went wrong. Please try again.')
+      setLoading(false)
+    }
   }
 
   return (

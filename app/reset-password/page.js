@@ -1,13 +1,16 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { IconLock, IconEye, IconEyeOff, IconCircleCheck } from '@tabler/icons-react'
 import '../login/auth.css'
 
 export default function ResetPasswordPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const token = searchParams.get('token')
+
   const [password, setPassword] = useState('')
   const [confirm, setConfirm] = useState('')
   const [showPw, setShowPw] = useState(false)
@@ -19,6 +22,10 @@ export default function ResetPasswordPage() {
     e.preventDefault()
     setError('')
 
+    if (!token) {
+      setError('Invalid reset link. Please request a new one.')
+      return
+    }
     if (!password || !confirm) {
       setError('Please fill in both fields.')
       return
@@ -33,13 +40,24 @@ export default function ResetPasswordPage() {
     }
 
     setLoading(true)
-    // ── TEMPORARY: fake reset for UI demo ──
-    // Later: POST /api/reset-password with the token from the URL,
-    // verify it isn't expired, hash the new password, clear the token.
-    setTimeout(() => {
+    try {
+      const res = await fetch('/api/reset-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token, password }),
+      })
+      if (!res.ok) {
+        const data = await res.json()
+        setError(data.error || 'Failed to reset password.')
+        setLoading(false)
+        return
+      }
       setLoading(false)
       setDone(true)
-    }, 600)
+    } catch (err) {
+      setError('Something went wrong. Please try again.')
+      setLoading(false)
+    }
   }
 
   return (
@@ -58,6 +76,14 @@ export default function ResetPasswordPage() {
             <button className="btn btn-primary auth-submit" onClick={() => router.push('/login')}>
               Go to sign in
             </button>
+          </>
+        ) : !token ? (
+          <>
+            <h1 className="auth-title">Invalid link</h1>
+            <p className="auth-sub">This reset link is invalid or missing. Please request a new one.</p>
+            <Link href="/forgot-password" className="btn btn-primary auth-submit" style={{ justifyContent: 'center' }}>
+              Request new link
+            </Link>
           </>
         ) : (
           <>
