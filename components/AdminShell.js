@@ -27,7 +27,11 @@ export default function AdminShell({ children }) {
               <div className="admin-avatar">SP</div>
               <span className="admin-user-name">Suviro Admin</span>
             </div>
-            <button className="admin-logout" onClick={() => router.push('/login')}>
+            <button className="admin-logout" onClick={() => {
+              document.cookie = 'suviro_admin_session=; path=/; max-age=0'
+              router.push('/login')
+              router.refresh()
+            }}>
               <IconLogout size={16} /> Sign out
             </button>
           </div>

@@ -26,11 +26,14 @@ export default function LoginPage() {
     setLoading(true)
 
     // ── TEMPORARY: fake login for UI demo ──
-    // Later this becomes a POST to /api/login that checks
-    // the password (bcrypt) and sets a JWT session cookie.
+    // Sets a dummy session cookie so middleware lets us into
+    // protected pages. Later this becomes a POST to /api/login
+    // that verifies the password (bcrypt) and sets a JWT cookie.
     setTimeout(() => {
+      document.cookie = 'suviro_admin_session=active; path=/; max-age=1800' // 30 min
       setLoading(false)
       router.push('/categories')
+      router.refresh()
     }, 500)
   }
 
