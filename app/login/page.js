@@ -25,16 +25,25 @@ export default function LoginPage() {
 
     setLoading(true)
 
-    // ── TEMPORARY: fake login for UI demo ──
-    // Sets a dummy session cookie so middleware lets us into
-    // protected pages. Later this becomes a POST to /api/login
-    // that verifies the password (bcrypt) and sets a JWT cookie.
-    setTimeout(() => {
-      document.cookie = 'suviro_admin_session=active; path=/; max-age=1800' // 30 min
-      setLoading(false)
+    // Real login — verifies credentials, sets JWT session cookie
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim(), password }),
+      })
+      if (!res.ok) {
+        const data = await res.json()
+        setError(data.error || 'Login failed. Please try again.')
+        setLoading(false)
+        return
+      }
       router.push('/categories')
       router.refresh()
-    }, 500)
+    } catch (err) {
+      setError('Something went wrong. Please try again.')
+      setLoading(false)
+    }
   }
 
   return (

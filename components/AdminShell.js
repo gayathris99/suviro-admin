@@ -27,8 +27,8 @@ export default function AdminShell({ children }) {
               <div className="admin-avatar">SP</div>
               <span className="admin-user-name">Suviro Admin</span>
             </div>
-            <button className="admin-logout" onClick={() => {
-              document.cookie = 'suviro_admin_session=; path=/; max-age=0'
+            <button className="admin-logout" onClick={async () => {
+              await fetch('/api/logout', { method: 'POST' })
               router.push('/login')
               router.refresh()
             }}>

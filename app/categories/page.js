@@ -214,16 +214,20 @@ export default function CategoriesPage() {
               <div className="field">
                 <label className="field-label">Icon <span className="req">*</span></label>
                 <div className="icon-picker">
-                  {ICON_OPTIONS.map((opt) => (
-                    <button
-                      key={opt.name}
-                      className={`ip ${form.icon === opt.name ? 'ip--sel' : ''}`}
-                      title={opt.label}
-                      onClick={() => setForm({ ...form, icon: opt.name })}
-                    >
-                      <CategoryIcon name={opt.name} size={22} color={form.icon === opt.name ? '#fff' : '#6b7280'} />
-                    </button>
-                  ))}
+                  {ICON_OPTIONS.map((opt) => {
+                    const isSel = form.icon === opt.name
+                    return (
+                      <button
+                        key={opt.name}
+                        className={`ip ${isSel ? 'ip--sel' : ''}`}
+                        title={opt.label}
+                        onClick={() => setForm({ ...form, icon: opt.name })}
+                        style={isSel ? { background: bgForColor(form.color), borderColor: form.color } : undefined}
+                      >
+                        <CategoryIcon name={opt.name} size={22} color={isSel ? form.color : '#6b7280'} />
+                      </button>
+                    )
+                  })}
                 </div>
                 <div className="hint">Pick the icon that best represents this category</div>
               </div>

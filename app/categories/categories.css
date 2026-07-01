@@ -91,7 +91,7 @@
   background: #fff; cursor: pointer; transition: all 0.15s;
 }
 .ip:hover { border-color: #c8d4e0; }
-.ip--sel { background: var(--accent); border-color: var(--accent); }
+.ip--sel { border-width: 1.5px; }
 
 /* Color picker */
 .color-picker { display: flex; gap: 10px; flex-wrap: wrap; }
